@@ -1,17 +1,17 @@
 # Shell
 File name: shell.c(Main file)
 External files:
-1.ls.c
-2.mkdir.c
-3.rm.c
-4.cat.c
-5.date.c
+1. ls.c
+1. mkdir.c
+1. rm.c
+1. cat.c
+1. date.c
 
 ## Text files used:
-1)his.txt(To append the output of the history command)
-2)mkdir.txt(contains help information of the mkdir command)
-3)pwd.txt(contains help information of the pwd command)
-4)cd.txt(contains help information of cd command)
+1. his.txt(To append the output of the history command)
+1. mkdir.txt(contains help information of the mkdir command)
+1. pwd.txt(contains help information of the pwd command)
+1. cd.txt(contains help information of cd command)
  
 Makefile:Makefile
 
@@ -44,98 +44,77 @@ Flags implemented:
 * echo -n [text]: Prints the specificied text on the console without a newline character.
 * echo -e \a echo -e [text]: Prints the specificied text on the console with a newline character and
                     creates an alert sound.
-* echo *:Behaves like ls and displays all files in a directory.
+* echo *: Behaves like ls and displays all files in a directory.
 
 1. help: Prints all the current available commands in the shell.
   This command does not accept any flags.
 
-5)history:Prints the commands executed in the shell in all executions of the shell.The 
+2. history: Prints the commands executed in the shell in all executions of the shell.The 
 history file contains data of execution corresponding to each run of the shell. 
 NOTE:The commands are appended for a particular run of the shell after the shell has exited,
 i.e after the loop has finished. After a run of the shell, we can view all the commands
 executed throughout the shell.
 Flags implemented:
-a)history - r:Appends the commands executed from the history file to the history list.
-b)history - c:Clears history of all commands executed.
+* history - r: Appends the commands executed from the history file to the history list.
+* history - c: Clears history of all commands executed.
 
 
-6)mkdir:Creates a directory with the supplied name in the directory of execution of the shell.
+3. mkdir:Creates a directory with the supplied name in the directory of execution of the shell.
 Flags implemented:
-a)mkdir - help: Specifies the details of the mkdir command in the shell.
-b)mkdir - v [directoryname]:Creates a directory in the verbose mode, i.e prints a 
+* mkdir - help: Specifies the details of the mkdir command in the shell.
+* mkdir - v [directoryname]: Creates a directory in the verbose mode, i.e prints a 
                             message after creation of each directory.
-c)mkdir name1 \b name2 \b name3:The given format is suppourted for creating a directory with spaces in name.
+* mkdir name1 \b name2 \b name3: The given format is suppourted for creating a directory with spaces in name.
                                 In this case, the \b acts an as an escape character for space.
                                 The user can enter a maximum of three strings seperated by space and backslash(\b)
                                 to create a directory with spaces in the title.
 
-7)rm:Removes the specified file
+4. rm: Removes the specified file
 Flags implemented:
-a)rm - d: Removes the directory(If the flag is not specified we can only remove files, not directories)
-b)rm - i [filename]:Removes files in the interactive mode. Prompts the user before the removal of every file. 
+* rm - d: Removes the directory(If the flag is not specified we can only remove files, not directories)
+* rm - i [filename]: Removes files in the interactive mode. Prompts the user before the removal of every file. 
                     If the user types a "y" on the screen, the file is removed, otherwise not.
 
-8)date:Prints the current date in day date time format
+5. date: Prints the current date in day date time format
 Flags implemented:
-a)date - u:This command displays the date in the UTC format.
-b)date - help: This command specifies the details of the date command, flags utilised 
+* date - u: This command displays the date in the UTC format.
+* date - help: This command specifies the details of the date command, flags utilised 
                and arguments accepted.
 
-9)cat:Prints the contents of the file specified by the user.
+6. cat: Prints the contents of the file specified by the user.
 Flags implemented:
-a)cat - n [filename]:Displays the contents on the file on the console in a numbered format.
-b)cat - E [filename]:Displays a '$' at the end of each line of the file to display file termination.
+* cat - n [filename]: Displays the contents on the file on the console in a numbered format.
+* cat - E [filename]: Displays a '$' at the end of each line of the file to display file termination.
 
 
-10)ls:Lists all documents/files and directories present in the current working directory.
+7. ls:Lists all documents/files and directories present in the current working directory.
 Flags implemented:
-a) ls - s:Lists the block size allocated to each file.
-b) ls - R:Lists all files and directories in recursive manner.
+* ls - s: Lists the block size allocated to each file.
+* ls - R: Lists all files and directories in recursive manner.
 
 
-11)exit:Exits the shell with an exit status depending on successful/unsuccessful execution.
+8. exit:Exits the shell with an exit status depending on successful/unsuccessful execution.
 Flags implemented:
-a)exit [n]: Exits the shell with the value specified by the user.
-b)exit - help:Displays help information about the exit command.
+* exit [n]: Exits the shell with the value specified by the user.
+* exit - help: Displays help information about the exit command.
 
 
-Steps followed in execution of the shell:
-
-1)The main of the shell gets called and the shell proceeds in the loop. The loop command involves three
-steps: Read the input line, Parse the input and Execute the command given. Based on the execution status of the command
-the execution status is returned which determines the execution status of the loop. The loop executes till the status is successful.
-
-2)The line is read using the getline method and then parsed into an args array that uses string delimiters to 
-seperate the string are store in arrays.
-
-3)Based on the values of user inputs, the respective test cases are called. All internal commmand codes are provided
-in the shell and are executed from within the shell. External commands call the respective external functions.
-
-4)For external commands, the parent process spawns a child process using the fork system call. The child process is
-executed by calling the execvp system call that accepts two arguments,the file path and the array of arguments to 
-pass to the function. The parent process waits for the child process to terminate using the wait system all. After the child process is executed,
-the control goes back to the parent process in the shell.
-
-5)The shell is executed till the exit status remains 1, i.e a successful exit. The shell exits only on providing the exit command.
-In case of any input discrepency, error handling mechanisms have been provided that are resposible to print appropriate messages.
-
-
-
-** Error Handling:
+## Error Handling:
 In the following cases, errors are thrown as user messages:
 
-1)If a user types a command that cannot be found in the shell:
+1. If a user types a command that cannot be found in the shell:
   "No such command found in my_shell"
 
-2)If a forking process fails and the parent fails to spawn the child process:
+2. If a forking process fails and the parent fails to spawn the child process:
   "Fork failed"
 
-3)In case if the user enters commands with unsuppourted flags in the shell:
+3. In case if the user enters commands with unsuppourted flags in the shell:
   "Flag not found"
 
-4)In case if the number of arguments suppiled is less than the requirement
+4. In case if the number of arguments suppiled is less than the requirement
   "Provide file or directory"
 
-5)If the file supplied cannot be found in the directory:
+5. If the file supplied cannot be found in the directory:
   "No such file or directory found"
-Each of these errors have been handled for the options and their specified flags.
+  
+* Each of these errors have been handled for the options and their specified flags.
